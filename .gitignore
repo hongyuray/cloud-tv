@@ -1,0 +1,18 @@
+# 构建产物
+*.apk
+*.apk.idsig
+build/
+*.jks
+*.keystore
+__pycache__/
+*.pyc
+
+# 工具链（体积大，不入库）
+sdk/
+
+# 系统 / 编辑器
+.DS_Store
+Thumbs.db
+.idea/
+*.iml
+.vscode/
