@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 构建 Cloud TV APK（不依赖 Gradle），Windows / macOS / Linux 通用。
@@ -23,8 +23,8 @@ import zipfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SDK = os.environ.get("CLOUDTV_SDK", os.path.join(ROOT, "sdk"))
 
-VERSION_CODE = "16"
-VERSION_NAME = "1.9.6"
+VERSION_CODE = "17"
+VERSION_NAME = "1.9.7"
 
 WIN = os.name == "nt"
 EXE = ".exe" if WIN else ""
