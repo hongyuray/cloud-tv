@@ -163,8 +163,8 @@ public class MainActivity extends Activity implements ConfigServer.Listener {
         root.addView(video);
 
         list = new ListView(this);
-        list.setBackgroundColor(Color.argb(200, 0, 0, 0));
-        list.setSelector(new ColorDrawable(Color.argb(150, 33, 150, 243)));
+        list.setBackgroundColor(Color.argb(150, 6, 12, 22));
+        list.setSelector(new ColorDrawable(Color.argb(110, 90, 190, 255)));
         list.setDrawSelectorOnTop(true);
         list.setDivider(null);
         list.setDividerHeight(0);
@@ -241,7 +241,7 @@ public class MainActivity extends Activity implements ConfigServer.Listener {
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         ltp.gravity = Gravity.TOP | Gravity.START;
         ltp.leftMargin = dp(14);
-        ltp.topMargin = dp(10);
+        ltp.topMargin = dp(56);
         liveTag.setLayoutParams(ltp);
         root.addView(liveTag);
 
@@ -615,6 +615,7 @@ public class MainActivity extends Activity implements ConfigServer.Listener {
 
     private void showLiveTag(MediaPlayer mp) {
         if (liveTag == null) return;
+        if (listVisible) return;   // 列表界面不显示，避免压住频道
         if (catchupMode) {
             liveTag.setText("回放 · " + (catchupLabel.length() > 0 ? catchupLabel : nowText()));
             liveTag.setTextColor(Color.rgb(255, 196, 0));
@@ -1394,7 +1395,7 @@ public class MainActivity extends Activity implements ConfigServer.Listener {
 
         ListView lv = new ListView(this);
         lv.setDivider(null);
-        lv.setSelector(new ColorDrawable(Color.argb(150, 33, 150, 243)));
+        lv.setSelector(new ColorDrawable(Color.argb(110, 90, 190, 255)));
         lv.setDrawSelectorOnTop(true);
         lv.setLayoutParams(new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, dp(380)));
@@ -1477,7 +1478,7 @@ public class MainActivity extends Activity implements ConfigServer.Listener {
         final Map<Integer, String> info = new HashMap<Integer, String>();
         final ListView lv = new ListView(this);
         lv.setDivider(null);
-        lv.setSelector(new ColorDrawable(Color.argb(150, 33, 150, 243)));
+        lv.setSelector(new ColorDrawable(Color.argb(110, 90, 190, 255)));
         lv.setDrawSelectorOnTop(true);
         lv.setLayoutParams(new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, dp(330)));
@@ -1772,7 +1773,7 @@ public class MainActivity extends Activity implements ConfigServer.Listener {
                 tv.setSingleLine(true);
                 tv.setPadding(dp(16), dp(14), dp(8), dp(14));
                 tv.setBackgroundColor(i == listSel
-                        ? Color.argb(150, 33, 150, 243) : Color.TRANSPARENT);
+                        ? Color.argb(110, 90, 190, 255) : Color.TRANSPARENT);
             }
             return tv;
         }
