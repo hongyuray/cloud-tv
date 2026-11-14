@@ -1,0 +1,46 @@
+name: Build APK
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Resolve Android SDK paths
+        run: |
+          BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+          PLAT=$(ls -d "$ANDROID_HOME"/platforms/android-* | sort -V | tail -1)
+          echo "CLOUDTV_JDK=$JAVA_HOME" >> "$GITHUB_ENV"
+          echo "CLOUDTV_BT=$BT" >> "$GITHUB_ENV"
+          echo "CLOUDTV_ANDROID_JAR=$PLAT/android.jar" >> "$GITHUB_ENV"
+          echo "using $BT / $PLAT"
+
+      - name: Build
+        run: python3 tools/build_apk.py
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CloudTV-apk
+          path: CloudTV-*.apk
+          if-no-files-found: error
+
+      - name: Attach APK to release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: CloudTV-*.apk
