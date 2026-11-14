@@ -20,6 +20,18 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      - name: Restore signing keystore
+        env:
+          KS_B64: ${{ secrets.CLOUDTV_KEYSTORE_B64 }}
+        run: |
+          if [ -n "$KS_B64" ]; then
+            echo "$KS_B64" | base64 -d > "$RUNNER_TEMP/cloudtv.jks"
+            echo "CLOUDTV_KEYSTORE=$RUNNER_TEMP/cloudtv.jks" >> "$GITHUB_ENV"
+            echo "using fixed signing key"
+          else
+            echo "no keystore secret, will generate a temporary one"
+          fi
+
       - name: Resolve Android SDK paths
         run: |
           BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
