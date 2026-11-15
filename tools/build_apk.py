@@ -23,8 +23,8 @@ import zipfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SDK = os.environ.get("CLOUDTV_SDK", os.path.join(ROOT, "sdk"))
 
-VERSION_CODE = "17"
-VERSION_NAME = "1.9.7"
+VERSION_CODE = "18"
+VERSION_NAME = "2.0.0"
 
 WIN = os.name == "nt"
 EXE = ".exe" if WIN else ""
