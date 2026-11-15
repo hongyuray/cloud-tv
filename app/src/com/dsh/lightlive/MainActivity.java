@@ -126,6 +126,13 @@ public class MainActivity extends Activity implements ConfigServer.Listener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 触摸屏设备（手机）走手机版界面
+        if (getPackageManager().hasSystemFeature(
+                android.content.pm.PackageManager.FEATURE_TOUCHSCREEN)) {
+            startActivity(new android.content.Intent(this, PhoneActivity.class));
+            finish();
+            return;
+        }
         prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
         // 1.3 起默认内置精选，老版本升级时把失效的 gh-proxy 源换成内置源
         if (prefs.getInt("prefs_ver", 0) < 4) {
